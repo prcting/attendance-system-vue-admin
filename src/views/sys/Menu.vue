@@ -1,10 +1,10 @@
 <template>
-  <div>main</div>
+<div>权限管理</div>
 </template>
 
 <script>
 export default {
-  name: "Index"
+  name: "Menu"
 }
 </script>
 
