@@ -6,7 +6,8 @@
                  :src="userInfo.avatar"></el-avatar>
       <el-dropdown>
             <span class="el-dropdown-link">
-              {{ userInfo.username }}<i class="el-icon-arrow-down el-icon--right"></i>
+              {{ userInfo.username }}<i
+                class="el-icon-arrow-down el-icon--right"></i>
             </span>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/userCenter">
@@ -32,17 +33,22 @@ export default {
     }
   },
   created() {
-    // this.getUserInfo();
+    this.getUserInfo();
   },
   methods: {
     getUserInfo() {
-      this.$axios.get("http://localhost:8888/user/userInfo").then(res => {
+      this.$axios.get("/userInfo").then(res => {
         this.userInfo = res.data.data
       })
     },
     logout() {
       const token = localStorage.getItem("token");
-      this.$axios.get('http://localhost:8888/user/logout', {headers: {Authorization: `${token}`,Accept: 'application/json'}}).then(res => {
+      this.$axios.get('logout', {
+        headers: {
+          Authorization: `${token}`,
+          Accept: 'application/json'
+        }
+      }).then(res => {
         this.$router.push("/login")
       })
     }
@@ -57,5 +63,9 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

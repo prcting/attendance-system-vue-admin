@@ -7,12 +7,12 @@ import Element from "element-ui"
 import "element-ui/lib/theme-chalk/index.css"
 
 import axios from './axios'
-// import global from './globalFun'
+import global from './globalFun'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
-require("./mock.js")
+// require("./mock.js")
 
 Vue.use(Element)
 

@@ -44,7 +44,7 @@
 					width="120">
 			</el-table-column>
 			<el-table-column
-					prop="code"
+					prop="roleKey"
 					label="唯一编码"
 					show-overflow-tooltip>
 			</el-table-column>
@@ -55,11 +55,11 @@
 			</el-table-column>
 
 			<el-table-column
-					prop="statu"
+					prop="status"
 					label="状态">
 				<template slot-scope="scope">
-					<el-tag size="small" v-if="scope.row.statu === 1" type="success">正常</el-tag>
-					<el-tag size="small" v-else-if="scope.row.statu === 0" type="danger">禁用</el-tag>
+					<el-tag size="small" v-if="scope.row.status === 0" type="success">正常</el-tag>
+					<el-tag size="small" v-else-if="scope.row.status === 1" type="danger">禁用</el-tag>
 				</template>
 
 			</el-table-column>
@@ -258,7 +258,7 @@
 						size: this.size
 					}
 				}).then(res => {
-					this.tableData = res.data.data.records
+					this.tableData = res.data.data.list
 					this.size = res.data.data.size
 					this.current = res.data.data.current
 					this.total = res.data.data.total
