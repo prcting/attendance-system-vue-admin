@@ -105,11 +105,10 @@ router.beforeEach((to, from, next) => {
 						// 转成路由
 						let route = menuToRoute(e)
 
-						// 吧路由添加到路由管理中
+						// 把路由添加到路由管理中
 						if (route) {
 							newRoutes[0].children.push(route)
 						}
-
 					})
 				}
 			})
@@ -122,8 +121,6 @@ router.beforeEach((to, from, next) => {
 			store.commit("changeRouteStatus", hasRoute)
 		})
 	}
-
-
 
 	next()
 })
