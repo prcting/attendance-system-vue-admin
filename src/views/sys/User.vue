@@ -15,11 +15,15 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="dialogVisible = true" v-if="hasAuth('sys:user:save')">新增</el-button>
+        <el-button type="primary" @click="dialogVisible = true"
+                   v-if="hasAuth('sys:user:save')">新增
+        </el-button>
       </el-form-item>
       <el-form-item>
         <el-popconfirm title="这是确定批量删除吗？" @confirm="delHandle(null)">
-          <el-button type="danger" slot="reference" :disabled="delBtlStatu" v-if="hasAuth('sys:user:delete')">批量删除</el-button>
+          <el-button type="danger" slot="reference" :disabled="delBtlStatu"
+                     v-if="hasAuth('sys:user:delete')">批量删除
+          </el-button>
         </el-popconfirm>
       </el-form-item>
     </el-form>
@@ -55,7 +59,9 @@
           prop="roleList"
           label="角色名称">
         <template slot-scope="scope">
-          <el-tag size="small" type="info" v-for="item in scope.row.roleList">{{item.name}}</el-tag>
+          <el-tag size="small" type="info" v-for="item in scope.row.roleList">
+            {{ item.name }}
+          </el-tag>
         </template>
 
       </el-table-column>
@@ -72,13 +78,18 @@
           prop="status"
           label="状态">
         <template slot-scope="scope">
-          <el-tag size="small" v-if="scope.row.status === '0'" type="success">正常</el-tag>
-          <el-tag size="small" v-else-if="scope.row.status === '1'" type="danger">禁用</el-tag>
+          <el-tag size="small" v-if="scope.row.status === '0'" type="success">
+            正常
+          </el-tag>
+          <el-tag size="small" v-else-if="scope.row.status === '1'"
+                  type="danger">禁用
+          </el-tag>
         </template>
 
       </el-table-column>
       <el-table-column
           prop="createTime"
+          :formatter="formatDate"
           width="200"
           label="创建时间"
       >
@@ -89,17 +100,23 @@
           label="操作">
 
         <template slot-scope="scope">
-          <el-button type="text" @click="roleHandle(scope.row.id)">分配角色</el-button>
+          <el-button type="text" @click="roleHandle(scope.row.id)">分配角色
+          </el-button>
           <el-divider direction="vertical"></el-divider>
 
-          <el-button type="text" @click="repassHandle(scope.row.id, scope.row.username)">重置密码</el-button>
+          <el-button type="text"
+                     @click="repassHandle(scope.row.id, scope.row.username)">
+            重置密码
+          </el-button>
           <el-divider direction="vertical"></el-divider>
 
-          <el-button type="text" @click="editHandle(scope.row.id)">编辑</el-button>
+          <el-button type="text" @click="editHandle(scope.row.id)">编辑
+          </el-button>
           <el-divider direction="vertical"></el-divider>
 
           <template>
-            <el-popconfirm title="这是一段内容确定删除吗？" @confirm="delHandle(scope.row.id)">
+            <el-popconfirm title="这是一段内容确定删除吗？"
+                           @confirm="delHandle(scope.row.id)">
               <el-button type="text" slot="reference">删除</el-button>
             </el-popconfirm>
           </template>
@@ -138,14 +155,14 @@
           ></el-alert>
         </el-form-item>
 
-        <el-form-item label="邮箱"  prop="email" label-width="100px">
+        <el-form-item label="邮箱" prop="email" label-width="100px">
           <el-input v-model="editForm.email" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="手机号"  prop="phone" label-width="100px">
+        <el-form-item label="手机号" prop="phone" label-width="100px">
           <el-input v-model="editForm.phone" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="状态"  prop="statu" label-width="100px">
+        <el-form-item label="状态" prop="statu" label-width="100px">
           <el-radio-group v-model="editForm.statu">
             <el-radio :label="0">禁用</el-radio>
             <el-radio :label="1">正常</el-radio>
@@ -155,7 +172,8 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="resetForm('editForm')">取 消</el-button>
-        <el-button type="primary" @click="submitForm('editForm')">确 定</el-button>
+        <el-button type="primary" @click="submitForm('editForm')">确 定
+        </el-button>
       </div>
     </el-dialog>
 
@@ -176,7 +194,8 @@
 
       <div slot="footer" class="dialog-footer">
         <el-button @click="roleDialogFormVisible=false">取 消</el-button>
-        <el-button type="primary" @click="submitRoleHandle('roleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitRoleHandle('roleForm')">确 定
+        </el-button>
       </div>
     </el-dialog>
 
@@ -196,9 +215,7 @@ export default {
       current: 1,
 
       dialogVisible: false,
-      editForm: {
-
-      },
+      editForm: {},
 
       tableData: [],
 
@@ -222,7 +239,7 @@ export default {
         label: 'name'
       },
       roleForm: {},
-      roleTreeData:  [],
+      roleTreeData: [],
       treeCheckedKeys: [],
       checkStrictly: true
 
@@ -245,6 +262,16 @@ export default {
         this.$refs.multipleTable.clearSelection();
       }
     },
+    formatDate(row, column) {
+      // 获取单元格数据
+      let data = row[column.property]
+      if (data == null) {
+        return null
+      }
+      let dt = new Date(data)
+      return dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate()
+    },
+
     handleSelectionChange(val) {
       console.log("勾选")
       console.log(val)
@@ -291,14 +318,14 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$axios.post('/sys/user/' + (this.editForm.id?'update' : 'save'), this.editForm)
+          this.$axios.post('/sys/user/' + (this.editForm.id ? 'update' : 'save'), this.editForm)
               .then(res => {
 
                 this.$message({
                   showClose: true,
                   message: '恭喜你，操作成功',
                   type: 'success',
-                  onClose:() => {
+                  onClose: () => {
                     this.getUserList()
                   }
                 });
@@ -337,14 +364,14 @@ export default {
           showClose: true,
           message: '恭喜你，操作成功',
           type: 'success',
-          onClose:() => {
+          onClose: () => {
             this.getUserList()
           }
         });
       })
     },
 
-    roleHandle (id) {
+    roleHandle(id) {
       this.roleDialogFormVisible = true
 
       this.$axios.get('/sys/user/info/' + id).then(res => {
@@ -368,7 +395,7 @@ export default {
           showClose: true,
           message: '恭喜你，操作成功',
           type: 'success',
-          onClose:() => {
+          onClose: () => {
             this.getUserList()
           }
         });
