@@ -66,7 +66,8 @@
         <template slot-scope="scope">
           <el-tag size="small" v-if="scope.row.status === '0'" type="success">正常
           </el-tag>
-          <el-tag size="small" v-else-if="scope.row.status === '1'" type="danger">
+          <el-tag size="small" v-else-if="scope.row.status === '1'"
+                  type="danger">
             禁用
           </el-tag>
         </template>
@@ -107,10 +108,10 @@
         <el-form-item label="上级菜单" prop="parentId">
           <el-select v-model="editForm.parentId" placeholder="请选择上级菜单">
             <template v-for="item in tableData">
-              <el-option :label="item.name" :value="item.id"></el-option>
+              <el-option :label="item.menuName" :value="item.id"></el-option>
               <template v-for="child in item.children">
-                <el-option :label="child.name" :value="child.id">
-                  <span>{{ "- " + child.name }}</span>
+                <el-option :label="child.menuName" :value="child.id">
+                  <span>{{ "- " + child.menuName }}</span>
                 </el-option>
               </template>
             </template>

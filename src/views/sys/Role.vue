@@ -200,7 +200,7 @@
 				permForm: {},
 				defaultProps: {
 					children: 'children',
-					label: 'name'
+					label: 'menuName'
 				},
 				permTreeData: []
 			}
@@ -210,6 +210,7 @@
 
 			this.$axios.get('/sys/menu/list').then(res => {
 				this.permTreeData = res.data.data
+        console.log(this.permTreeData)
 			})
 		},
 		methods: {

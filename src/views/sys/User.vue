@@ -105,7 +105,7 @@
           <el-divider direction="vertical"></el-divider>
 
           <el-button type="text"
-                     @click="repassHandle(scope.row.id, scope.row.username)">
+                     @click="repassHandle(scope.row.id, scope.row.userName)">
             重置密码
           </el-button>
           <el-divider direction="vertical"></el-divider>
@@ -145,7 +145,7 @@
         :before-close="handleClose">
 
       <el-form :model="editForm" :rules="editFormRules" ref="editForm">
-        <el-form-item label="用户名" prop="username" label-width="100px">
+        <el-form-item label="用户名" prop="userName" label-width="100px">
           <el-input v-model="editForm.username" autocomplete="off"></el-input>
           <el-alert
               title="初始密码为888888"
@@ -177,7 +177,7 @@
       </div>
     </el-dialog>
 
-    <!-- 分配权限对话框 -->
+    <!-- 分配角色对话框 -->
     <el-dialog title="分配角色" :visible.sync="roleDialogFormVisible" width="600px">
 
       <el-form :model="roleForm">
@@ -249,7 +249,7 @@ export default {
     this.getUserList()
 
     this.$axios.get("/sys/role/list").then(res => {
-      this.roleTreeData = res.data.data.records
+      this.roleTreeData = res.data.data.list
     })
   },
   methods: {
